@@ -1,4 +1,4 @@
-﻿namespace CustomerApi.Models
+﻿namespace OrderApi.Models.Child
 {
     public class Address
     {

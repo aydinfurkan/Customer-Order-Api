@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CustomerApi.Models;
 using CustomerApi.Models.Request;
 using CustomerApi.Services.Interfaces;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/customer")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -29,37 +30,30 @@ namespace CustomerApi.Controllers
         [HttpPut("")]
         public ActionResult<bool> UpdateCustomer(CustomerUpdateRequestModel customerRequestModel)
         {
-            var customer = _customerServices.GetById(customerRequestModel.Id);
-            customer.Update(customerRequestModel);
-            return _customerServices.Update(customerRequestModel.Id, customer);
+            var customerModel = _customerServices.GetById(customerRequestModel.Id);
+            customerModel.Update(customerRequestModel);
+            return _customerServices.Update(customerRequestModel.Id, customerModel);
         }
         
         [HttpDelete("")]
         public ActionResult<bool> DeleteCustomer(Guid id)
         {
-            _customerServices.Remove(id);
-            return Ok();
+            return _customerServices.Remove(id);
         }
         
         [HttpGet("all")]
         public ActionResult<List<CustomerResponseModel>> GetCustomers()
         {
             var customers = _customerServices.GetAll();
-            
-            List<CustomerResponseModel> customersResponse = new List<CustomerResponseModel>();
-            foreach (var customer in customers)
-            {
-                customersResponse.Add(new CustomerResponseModel(customer));
-            }
 
-            return customersResponse;
+            return customers.Select(customer => new CustomerResponseModel(customer)).ToList();
         }
         
         [HttpGet("")]
         public ActionResult<CustomerResponseModel> GetCustomer(Guid id)
         {
-            var customer = _customerServices.GetById(id);
-            return new CustomerResponseModel(customer);
+            var customerModel = _customerServices.GetById(id);
+            return new CustomerResponseModel(customerModel);
         }
         
         [HttpGet("valid")]

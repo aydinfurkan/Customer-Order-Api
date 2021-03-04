@@ -12,10 +12,10 @@ namespace CustomerApi.Repository.Interfaces
         public IEnumerable<T> InsertMany(IEnumerable<T> documents);
         public bool Replace(Expression<Func<T, bool>> expression, T document);
         public bool Update(Expression<Func<T, bool>> expression, Expression<Func<T, object>> field, object value);
-        public bool UpdateAll(Expression<Func<T, bool>> expression, Expression<Func<T, object>> field, object value);
-        public bool UpdateManyField(Expression<Func<T, bool>> expression,
+        public long UpdateAll(Expression<Func<T, bool>> expression, Expression<Func<T, object>> field, object value);
+        public long UpdateManyField(Expression<Func<T, bool>> expression,
             IEnumerable<KeyValuePair<Expression<Func<T, object>>, object>> updates);
         public bool Delete(Expression<Func<T, bool>> expression);
-        public bool DeleteAll();
+        public long DeleteAll();
     }
 }

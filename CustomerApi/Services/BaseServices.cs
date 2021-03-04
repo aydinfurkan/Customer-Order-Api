@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using CustomerApi.Http;
 using CustomerApi.Models;
 using CustomerApi.Repository.Interfaces;
@@ -33,12 +34,29 @@ namespace CustomerApi.Services
 
         public bool Update(Guid id, T document)
         {
-            return Repository.Replace(x => x.Id == id, document);
+            var result = Repository.Replace(x => x.Id == id, document);
+            
+            if(!result) throw new HttpNotFound(id.ToString());
+
+            return result;
+        }
+
+        public bool UpdateField(Guid id, Expression<Func<T, object>> field, object value)
+        {
+            var result = Repository.Update(x => x.Id == id, field, value);
+            
+            if(!result) throw new HttpNotFound(id.ToString());
+
+            return result;
         }
 
         public bool Remove(Guid id)
         {
-            return Repository.Delete(x => x.Id == id);
+            var result = Repository.Delete(x => x.Id == id);
+            
+            if(!result) throw new HttpNotFound(id.ToString());
+
+            return result;
         }
 
         public bool IsValid(Guid id)

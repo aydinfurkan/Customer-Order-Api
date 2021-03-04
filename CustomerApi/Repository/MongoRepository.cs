@@ -49,7 +49,7 @@ namespace CustomerApi.Repository
             document.UpdatedTime = DateTime.Now;
             var filter = Builders<T>.Filter.Where(expression);
             var result = _collection.ReplaceOne(filter, document);
-            return result.IsAcknowledged;
+            return result.ModifiedCount == 1;
         }
 
         public bool Update(Expression<Func<T, bool>> expression, Expression<Func<T, object>> field, object value)
@@ -57,18 +57,18 @@ namespace CustomerApi.Repository
             var filter = Builders<T>.Filter.Where(expression);
             var update = Builders<T>.Update.Set(field, value).Set(x => x.UpdatedTime, DateTime.Now);
             var result = _collection.UpdateOne(filter, update);
-            return result.IsAcknowledged;
+            return result.ModifiedCount == 1;
         }
 
-        public bool UpdateAll(Expression<Func<T, bool>> expression, Expression<Func<T, object>> field, object value)
+        public long UpdateAll(Expression<Func<T, bool>> expression, Expression<Func<T, object>> field, object value)
         {
             var filter = Builders<T>.Filter.Where(expression);
             var update = Builders<T>.Update.Set(field, value).Set(x => x.UpdatedTime, DateTime.Now);
             var result = _collection.UpdateMany(filter, update);
-            return result.IsAcknowledged;
+            return result.ModifiedCount;
         }
 
-        public bool UpdateManyField(Expression<Func<T, bool>> expression,
+        public long UpdateManyField(Expression<Func<T, bool>> expression,
             IEnumerable<KeyValuePair<Expression<Func<T, object>>, object>> updates)
         {
             var filter = Builders<T>.Filter.Where(expression);
@@ -76,20 +76,20 @@ namespace CustomerApi.Repository
             foreach (var (key, value) in updates) update = update.Set(key, value);
             update = update.Set(x => x.UpdatedTime, DateTime.Now);
             var result = _collection.UpdateOne(filter, update);
-            return result.IsAcknowledged;
+            return result.ModifiedCount;
         }
 
         public bool Delete(Expression<Func<T, bool>> expression)
         {
             var filter = Builders<T>.Filter.Where(expression);
             var result = _collection.DeleteOne(filter);
-            return result.IsAcknowledged;
+            return result.DeletedCount == 1;
         }
 
-        public bool DeleteAll()
+        public long DeleteAll()
         {
             var result = _collection.DeleteMany(x => true);
-            return result.IsAcknowledged;
+            return result.DeletedCount;
         }
 
         private void CreateNewDocument(T document)

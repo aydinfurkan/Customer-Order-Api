@@ -1,4 +1,5 @@
 ﻿using System;
+using CustomerApi.Models.Child;
 
 namespace CustomerApi.Models.Request
 {

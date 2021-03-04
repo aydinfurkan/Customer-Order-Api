@@ -1,4 +1,6 @@
-﻿namespace CustomerApi.Models.Request
+﻿using CustomerApi.Models.Child;
+
+namespace CustomerApi.Models.Request
 {
     public class CustomerCreateRequestModel
     {

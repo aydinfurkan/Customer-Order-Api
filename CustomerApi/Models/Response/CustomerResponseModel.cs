@@ -1,4 +1,6 @@
-﻿namespace CustomerApi.Models
+﻿using CustomerApi.Models.Child;
+
+namespace CustomerApi.Models
 {
     public class CustomerResponseModel : BaseModel
     {

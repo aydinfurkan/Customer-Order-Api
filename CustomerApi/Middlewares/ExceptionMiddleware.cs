@@ -24,12 +24,7 @@ namespace CustomerApi.Middlewares
             {
                 context.Response.StatusCode = (int) httpException.HttpStatusCode;
                 context.Response.ContentType = "application/json";
-                context.Response.WriteAsync(httpException.Message).Wait();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("ASDASD"); // TODO Async controller
-                Console.WriteLine(exception);
+                context.Response.WriteAsJsonAsync(httpException.Message).Wait();
             }
         }
 
