@@ -1,21 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CustomerApi.DatabaseSettings;
 using CustomerApi.Middlewares;
+using CustomerApi.Models.Request;
 using CustomerApi.Repository;
 using CustomerApi.Repository.Interfaces;
 using CustomerApi.Services;
 using CustomerApi.Services.Interfaces;
+using CustomerApi.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
@@ -38,6 +35,11 @@ namespace CustomerApi
             
             services.AddSingleton<IMongoContext, MongoContext>();
             services.AddSingleton<ICustomerServices, CustomerServices>();
+            
+            services.AddMvc().AddFluentValidation();
+            services.AddTransient<IValidator<CustomerCreateRequestModel>, CustomerCreateValidator>();
+            services.AddTransient<IValidator<CustomerUpdateRequestModel>, CustomerUpdateValidator>();
+            
             
             services.AddControllers();
             services.AddSwaggerGen(c =>

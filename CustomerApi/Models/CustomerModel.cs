@@ -37,6 +37,7 @@ namespace CustomerApi.Models
 
         public void Update(CustomerUpdateRequestModel customerUpdateRequestModel)
         {
+            customerUpdateRequestModel.Address.AddressLine ??= "";
             Name = customerUpdateRequestModel.Name;
             Email = customerUpdateRequestModel.Email;
             Address = customerUpdateRequestModel.Address;

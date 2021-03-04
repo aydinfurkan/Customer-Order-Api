@@ -5,7 +5,7 @@ namespace CustomerApi.Http
 {
     public class HttpBadRequest : HttpException
     {
-        public HttpBadRequest() : base("Syntax error!", HttpStatusCode.BadRequest)
+        public HttpBadRequest(string e) : base("Syntax error!\nMessage : " + e, HttpStatusCode.BadRequest)
         {
         }
     }

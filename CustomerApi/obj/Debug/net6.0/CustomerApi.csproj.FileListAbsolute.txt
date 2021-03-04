@@ -39,3 +39,6 @@ C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\obj\Debug\net6.0\Cus
 C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\obj\Debug\net6.0\ref\CustomerApi.dll
 C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\obj\Debug\net6.0\CustomerApi.pdb
 C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\obj\Debug\net6.0\CustomerApi.genruntimeconfig.cache
+C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\furkan\RiderProjects\Tesodev-Challange\CustomerApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
