@@ -36,15 +36,11 @@ namespace OrderApi.Validators
                 .NotNull()
                 .NotEmpty()
                 .OnFailure(x => throw new HttpBadRequest("City is required"));
-            RuleFor(x => x.Product.Id)
-                .NotNull()
-                .NotEmpty()
-                .OnFailure(x => throw new HttpBadRequest("Product id is required"));
-            RuleFor(x => x.Product.ImageUrl)
+            RuleFor(x => x.ProductRequest.ImageUrl)
                 .NotNull()
                 .NotEmpty()
                 .OnFailure(x => throw new HttpBadRequest("ImageUrl is required"));
-            RuleFor(x => x.Product.Name)
+            RuleFor(x => x.ProductRequest.Name)
                 .NotNull()
                 .NotEmpty()
                 .OnFailure(x => throw new HttpBadRequest("Product name is required"));

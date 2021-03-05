@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using OrderApi.Client.Interfaces;
 using OrderApi.Http;
 using OrderApi.Models;
 using OrderApi.Repository.Interfaces;
@@ -11,6 +12,7 @@ namespace OrderApi.Services
     public abstract class BaseServices<T> : IBaseService<T> where T : BaseModel
     {
         public abstract IBaseRepository<T> Repository { get; set; }
+        public abstract IMyHttpClient MyHttpClient { get; set; }
 
         public List<T> GetAll()
         {

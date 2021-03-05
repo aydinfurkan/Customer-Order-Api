@@ -37,4 +37,10 @@ namespace OrderApi.Http
         {
         }
     }
+    public class HttpServiceUnavailable : HttpException
+    {
+        public HttpServiceUnavailable() : base("Service is not available", HttpStatusCode.ServiceUnavailable)
+        {
+        }
+    }
 }

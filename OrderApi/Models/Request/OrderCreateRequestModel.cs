@@ -1,5 +1,6 @@
 ﻿using System;
 using OrderApi.Models.Child;
+using OrderApi.Models.Request.Child;
 
 namespace OrderApi.Models.Request
 {
@@ -10,6 +11,6 @@ namespace OrderApi.Models.Request
         public double Price { get; set; }
         public string Status { get; set; }
         public Address Address { get; set; }
-        public Product Product { get; set; }
+        public ProductRequest ProductRequest { get; set; }
     }
 }

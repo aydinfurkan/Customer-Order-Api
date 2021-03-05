@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using OrderApi.Client;
+using OrderApi.Client.Interfaces;
 using OrderApi.DatabaseSettings;
 using OrderApi.Middlewares;
 using OrderApi.Models.Request;
@@ -34,8 +36,8 @@ namespace OrderApi
             services.AddSingleton(sp => sp.GetRequiredService<IOptions<OrderDatabaseSettings>>().Value);
             
             services.AddSingleton<IMongoContext, MongoContext>();
-            services.AddSingleton<IOrderServices, CustomerServices>();
-            
+            services.AddSingleton<IOrderServices, OrderServices>();
+
             services.AddMvc().AddFluentValidation();
             services.AddTransient<IValidator<OrderCreateRequestModel>, OrderCreateValidator>();
             services.AddTransient<IValidator<OrderUpdateRequestModel>, OrderUpdateValidator>();

@@ -12,7 +12,7 @@ namespace OrderApi.Models
             Quantity = customerRequestModel.Quantity;
             Price = customerRequestModel.Price;
             Status = customerRequestModel.Status;
-            Product = customerRequestModel.Product;
+            Product = new Product(customerRequestModel.ProductRequest);
             Address = customerRequestModel.Address;
         }
         public Guid CustomerId { get; set; }
@@ -30,7 +30,7 @@ namespace OrderApi.Models
             Quantity = customerUpdateRequestModel.Quantity;
             Price = customerUpdateRequestModel.Price;
             Status = customerUpdateRequestModel.Status;
-            Product = customerUpdateRequestModel.Product;
+            Product = new Product(customerUpdateRequestModel.ProductRequest);
             Address = customerUpdateRequestModel.Address;
         }
     }
