@@ -49,7 +49,7 @@ namespace CustomerApi.Controllers
             return customers.Select(customer => new CustomerResponseModel(customer)).ToList();
         }
         
-        [HttpGet("")]
+        [HttpGet("{id}")]
         public ActionResult<CustomerResponseModel> GetCustomer(Guid id)
         {
             var customerModel = _customerServices.GetById(id);

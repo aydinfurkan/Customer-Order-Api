@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using OrderApi.Client.Interfaces;
 using OrderApi.Repository.Interfaces;
 
 namespace OrderApi.Services.Interfaces
@@ -8,6 +9,7 @@ namespace OrderApi.Services.Interfaces
     public interface IBaseService<T>
     {
         public IBaseRepository<T> Repository { set; get; }
+        public IMyHttpClient MyHttpClient { get; set; }
         public List<T> GetAll();
         public T GetById(Guid id);
         public T Create(T document);

@@ -39,7 +39,15 @@ namespace OrderApi.Services
             throw new HttpNotFound(document.CustomerId.ToString());
 
         }
+        public List<OrderModel> GetByCustomerId(Guid customerId)
+        {
+            var orderModels = Repository.FindMany(x => x.CustomerId == customerId);
 
+            if(orderModels == null || !orderModels.Any())
+                throw new HttpNotFound(customerId.ToString());
+
+            return orderModels;
+        }
         private HttpResponseMessage GetIsCustomerValid(Guid customerId)
         {
             try
@@ -51,16 +59,6 @@ namespace OrderApi.Services
                 throw new HttpServiceUnavailable();
             }
             
-        }
-
-        public List<OrderModel> GetByCustomerId(Guid customerId)
-        {
-            var orderModels = Repository.FindMany(x => x.CustomerId == customerId);
-
-            if(orderModels == null || !orderModels.Any())
-                throw new HttpNotFound(customerId.ToString());
-
-            return orderModels;
         }
         
     }
